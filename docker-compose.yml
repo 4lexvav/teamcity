@@ -15,10 +15,10 @@ services:
         volumes:
             - $PWD/conf:/data/teamcity_agent/conf
             - /var/run/docker.sock:/var/run/docker.sock
-            - /opt/buildagent/work:/opt/buildagent/work
-            - /opt/buildagent/temp:/opt/buildagent/temp
-            - /opt/buildagent/tools:/opt/buildagent/tools
-            - /opt/buildagent/plugins:/opt/buildagent/plugins
-            - /opt/buildagent/system:/opt/buildagent/system
+            - $PWD/buildagent/work:/opt/buildagent/work
+            - $PWD/buildagent/temp:/opt/buildagent/temp
+            - $PWD/buildagent/tools:/opt/buildagent/tools
+            - $PWD/buildagent/plugins:/opt/buildagent/plugins
+            - $PWD/buildagent/system:/opt/buildagent/system
         environment:
             - SERVER_URL=http://teamcity-server-instance:8111
