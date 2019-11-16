@@ -1,0 +1,24 @@
+version: '3'
+services:
+    teamcity-server-instance:
+        image: jetbrains/teamcity-server
+        ports:
+            - 8111:8111
+        restart: always
+        volumes:
+            - $PWD/data:/data/teamcity_server/datadir
+            - $PWD/logs:/opt/teamcity/logs
+        
+    teamcity-agent-instance:
+        image: jetbrains/teamcity-agent
+        restart: always
+        volumes:
+            - $PWD/conf:/data/teamcity_agent/conf
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /opt/buildagent/work:/opt/buildagent/work
+            - /opt/buildagent/temp:/opt/buildagent/temp
+            - /opt/buildagent/tools:/opt/buildagent/tools
+            - /opt/buildagent/plugins:/opt/buildagent/plugins
+            - /opt/buildagent/system:/opt/buildagent/system
+        environment:
+            - SERVER_URL=http://teamcity-server-instance:8111
